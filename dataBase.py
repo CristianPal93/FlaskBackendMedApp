@@ -62,6 +62,7 @@ class DataBase:
             sql = 'Insert into Schedule(Cnp,FirstName,LastName,FirstNameDoctor,LastNameDoctor,Specialization,ScheduleTime) VALUES ("'+pacient[0][3]+'","'+pacient[0][0]+'","'+pacient[0][1]+'","'+doctor[0][0]+'","'+doctor[0][1]+'","'+spec[0][1]+'","'+self.__get_curent_time()+'");'
             self.connection.connect()
             self.connection.execute(sql)
+            return True
         else:
             print('Schema is missing!')
             self.__create_dataBase()

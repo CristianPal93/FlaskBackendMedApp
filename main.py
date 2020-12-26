@@ -83,7 +83,38 @@ def register_client():
         if dataBase.checkUser(email, password):
             return jsonify({"message":"account created succesfully!"})
         return jsonify({'message':'something went wrong.. :('})
+    # def write_schedule(self, pacient_cnp, doctor_first_name, doctor_last_name, doctor_specialization):
 
+
+@app.route('/write_schedule',methods=['POST'])
+def register_client():
+    if "pacient_cnp" and "doctor_firstname" and "doctor_lastname" and "doctor_spec" in request.headers:
+        pacient_cnp=request.headers['pacient_cnp']
+        doc_firstname=request.headers['doctor_firstname']
+        doc_lastname=request.headers['doctor_lastname']
+        doc_spec=request.headers['doctor_spec']
+        dataBase=DataBase()
+        success=dataBase.write_schedule(pacient_cnp,doc_firstname,doc_lastname,doc_spec)
+        if success:
+            return jsonify({"message":"account created succesfully!"})
+        return jsonify({'message':'something went wrong.. :('})
+
+@app.route('/register-secretary',methods=['POST'])
+def register_client():
+    if "fullname" and "email" and "password" and "cnp" in request.headers:
+        fullname = request.headers['fullname']
+        email = request.headers['email']
+        password = request.headers['password']
+        cnp = request.headers['cnp']
+        dataBase=DataBase()
+        if dataBase.checkJob(email,password):
+            return jsonify({'message':"email already exists"})
+        firstName,lastName=fullname.split(" ")
+        job='secretary'
+        dataBase.insertPacient(lastName,firstName,cnp,job,email,password)
+        if dataBase.checkUser(email, password):
+            return jsonify({"message":"account created succesfully!"})
+        return jsonify({'message':'something went wrong.. :('})
 
 @app.route('/register-client',methods=['POST'])
 def register_client():
