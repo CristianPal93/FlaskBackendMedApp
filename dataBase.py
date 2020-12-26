@@ -115,6 +115,7 @@ class DataBase:
     def checkJob(self,username,password):
         sqlQuery = "SELECT * FROM PERSON WHERE email='" + username + "' and Password='" + password + "';"
         result = self.get_from_db(sqlQuery)
+        print(result)
         if len(result)>0:
             return result[0][3]
         return None
@@ -144,9 +145,9 @@ if __name__ == "__main__":
     # d.insertDoctor(name,first_name,email,passwd,cnp)
 
 
-    # rez=d.checkUser("cristian.pal@gmail.com","Admin123")
-    # print(rez)
-    # print(d.checkJob("cristian.pal@gmail.com","Admin123"))
+    rez=d.checkUser("cristian.pal@gmail.com","Admin123")
+    print(rez)
+    print(d.checkJob("laurentiu.girleanu@gmail.com","Admin1234"))
 
     # sql = 'Insert INTO Person(LastName,FirstName,Cnp,Job,Email,Password) VALUES ("Cristian","Pal","1930925303932","pacient","cristian.pal@gmail.com","Admin123");'
     # d.wirite_to_db(sql)
@@ -156,8 +157,8 @@ if __name__ == "__main__":
     # d.wirite_to_db(sql)
     # sql = 'Insert INTO Person(LastName,FirstName,Cnp,Job,Email,password) VALUES ("Ion","Popescu","1910924403932","doctor","ion.popescu@gmail.com","Admin12345");'
     # d.wirite_to_db(sql)
-    sql = 'SELECT * FROM person';
-    print(d.get_from_db(sql))
+    # sql = 'SELECT * FROM person';
+    # print(d.get_from_db(sql))
     # sql='Insert INTO Specialization(Cnp,Specialization,phoneNumber) VALUES ("1910925303932","Psiholog","+40742451132");'
     # d.wirite_to_db(sql)
     # sql = 'Insert INTO Specialization(Cnp,Specialization,phoneNumber) VALUES ("1910924403932","Neurolog","+40742451123");'

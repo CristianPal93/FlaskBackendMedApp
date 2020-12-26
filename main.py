@@ -65,7 +65,7 @@ def contact():
 
 
 @app.route('/create-doctor',methods=['POST'])
-def register_client():
+def register_doctor():
     if "fullname" and "email" and "password" and "cnp" and "spec" and "cellphone" in request.headers:
         fullname = request.headers['fullname']
         email = request.headers['email']
@@ -87,7 +87,7 @@ def register_client():
 
 #adauga si ora
 @app.route('/write-schedule',methods=['POST'])
-def register_client():
+def register_schedule():
     if "pacient_cnp" and "doctor_firstname" and "doctor_lastname" and "doctor_spec" and "time_for_consult" in request.headers:
         pacient_cnp=request.headers['pacient_cnp']
         doc_firstname=request.headers['doctor_firstname']
@@ -101,7 +101,7 @@ def register_client():
         return jsonify({'message':'something went wrong.. :('})
 
 @app.route('/register-secretary',methods=['POST'])
-def register_client():
+def register_secretary():
     if "fullname" and "email" and "password" and "cnp" in request.headers:
         fullname = request.headers['fullname']
         email = request.headers['email']
@@ -162,7 +162,7 @@ def login():
         full_Name=first_name+" "+last_name
         token = jwt.encode({'USER_KEY': username, 'exp': tokenValability},
                            app.config['SECRET_KEY'])
-        return jsonify({'accessToken': token.decode('UTF-8'), 'USER_KEY': full_Name})
+        return jsonify({'accessToken': token.decode('UTF-8'), 'USER_KEY': full_Name, 'USER_ROLE':user_rights})
     return make_response({'message': 'Invalid credentials'}, 401)
 
 
