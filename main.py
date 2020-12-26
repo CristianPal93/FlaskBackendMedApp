@@ -64,6 +64,27 @@ def contact():
     return jsonify({"message": "Invalid request"})
 
 
+@app.route('/create-doctor',methods=['POST'])
+def register_client():
+    if "fullname" and "email" and "password" and "cnp" and "spec" and "cellphone" in request.headers:
+        fullname = request.headers['fullname']
+        email = request.headers['email']
+        password = request.headers['password']
+        cnp = request.headers['cnp']
+        phone=request.headers['cellphone']
+        spec=request.headers['spec']
+        dataBase=DataBase()
+        if dataBase.checkJob(email,password):
+            return jsonify({'message':"email already exists"})
+        firstName,lastName=fullname.split(" ")
+        job='doctor'
+        dataBase.insertDoctor(lastName,firstName,cnp,job,email,password)
+        dataBase.addSpecialization(cnp,spec,phone)
+        if dataBase.checkUser(email, password):
+            return jsonify({"message":"account created succesfully!"})
+        return jsonify({'message':'something went wrong.. :('})
+
+
 @app.route('/register-client',methods=['POST'])
 def register_client():
     if "fullname" and "email" and "password" and "cnp" in request.headers:

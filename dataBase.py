@@ -66,6 +66,15 @@ class DataBase:
             print('Schema is missing!')
             self.__create_dataBase()
             self.write_schedule(self, pacient_cnp, doctor_first_name, doctor_last_name, doctor_specialization)
+    def insertDoctor(self,last_name,first_name,email,password,cnp=None):
+        if(cnp is not None):
+            sql = "Insert INTO Person(LastName,FirstName,Cnp,Job,Email,Password) VALUES ("+first_name+","+last_name+","+cnp+",doctor,"+email+","+password+");"
+        else:
+            sql = "Insert INTO Person(LastName,FirstName,Job,Email,Password) VALUES ("+first_name+","+last_name+","+"doctor,"+email+","+password+");"
+        if(sql):
+            self.wirite_to_db(sql)
+        else:
+            print("No sql query!")
 
     def get_from_db(self, query):
         if self.connection is not None:
@@ -97,7 +106,12 @@ class DataBase:
         if len(result)>0:
             return result[0][3]
         return None
-
+    def deleteRecordFromPerson(self,cnp):
+        sql="Delete from Person where cnp="+cnp+";"
+        self.wirite_to_db(sql)
+    def addSpecialization(self,cnp,spec,cellphone):
+        sql = "Insert INTO Specialization(Cnp,Specialization,phoneNumber) VALUES ("+cnp+","+spec+","+cellphone+");"
+        self.wirite_to_db(sql)
     def insertPacient(self,lastName,firstName,cnp,job,email,password):
         sql = "Insert INTO Person(LastName,FirstName,Cnp,Job,Email,Password) VALUES ('"+firstName+"','"+lastName+"','"+cnp+"','"+job+"','"+email+"','"+password+"');"
         self.wirite_to_db(sql)
@@ -109,7 +123,15 @@ class DataBase:
         return self.get_from_db(sql)
 if __name__ == "__main__":
     d = DataBase()
-    print(d.doctor_specializations('1910924403932'))
+    # print(d.doctor_specializations('1910924403932'))
+    # name="John"
+    # first_name="Popescu"
+    # passwd="Admin123"
+    # email="pojohn@gmail.com"
+    # cnp="1932509393032"
+    # d.insertDoctor(name,first_name,email,passwd,cnp)
+
+
     # rez=d.checkUser("cristian.pal@gmail.com","Admin123")
     # print(rez)
     # print(d.checkJob("cristian.pal@gmail.com","Admin123"))
@@ -122,8 +144,8 @@ if __name__ == "__main__":
     # d.wirite_to_db(sql)
     # sql = 'Insert INTO Person(LastName,FirstName,Cnp,Job,Email,password) VALUES ("Ion","Popescu","1910924403932","doctor","ion.popescu@gmail.com","Admin12345");'
     # d.wirite_to_db(sql)
-    # sql = 'SELECT * FROM person';
-    # # print(d.get_from_db(sql))
+    sql = 'SELECT * FROM person';
+    print(d.get_from_db(sql))
     # sql='Insert INTO Specialization(Cnp,Specialization,phoneNumber) VALUES ("1910925303932","Psiholog","+40742451132");'
     # d.wirite_to_db(sql)
     # sql = 'Insert INTO Specialization(Cnp,Specialization,phoneNumber) VALUES ("1910924403932","Neurolog","+40742451123");'
