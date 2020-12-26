@@ -29,6 +29,19 @@ class DataBase:
         self.connection.execute(sql_statement)
         sql_statement = 'CREATE TABLE Schedule(Cnp varchar(13),FirstName varchar(255), LastName varchar(255),FirstNameDoctor varchar(255), LastNameDoctor varchar(255),Specialization varchar(255),ScheduleTime TIMESTAMP UNIQUE , FOREIGN KEY (Cnp) REFERENCES Person(Cnp));'
         self.connection.execute(sql_statement)
+        sql_statement = 'CREATE TABLE Tarif(Service varchar(13) primary key,Price varchar(255));'
+        self.connection.execute(sql_statement)
+
+    def addPrice(self,service,price):
+        sql="INSERT INTO Tarif(Service,Price) VALUES ("+service+","+price+");"
+        self.wirite_to_db(sql)
+
+    def removeService(self,serviceName):
+        sql = "DELETE FROM Tarif where Service="+serviceName+";"
+        self.wirite_to_db(sql)
+    def modifyPrice(self,service,price):
+        sql="UPDATE Tarif SET Price="+price+"where Service="+service+";"
+        self.wirite_to_db(sql)
 
     def __create_connection(self):
         engine = create_engine('sqlite:///schema.db', echo=True)

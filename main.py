@@ -85,7 +85,7 @@ def register_client():
         return jsonify({'message':'something went wrong.. :('})
     # def write_schedule(self, pacient_cnp, doctor_first_name, doctor_last_name, doctor_specialization):
 
-
+#adauga si ora
 @app.route('/write-schedule',methods=['POST'])
 def register_client():
     if "pacient_cnp" and "doctor_firstname" and "doctor_lastname" and "doctor_spec" and "time_for_consult" in request.headers:
