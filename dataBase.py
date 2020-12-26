@@ -51,15 +51,13 @@ class DataBase:
             self.__create_dataBase()
             self.wirite_to_db(query)
 
-    def write_schedule(self, pacient_cnp, doctor_first_name, doctor_last_name, doctor_specialization):
+    def write_schedule(self, pacient_cnp, doctor_first_name, doctor_last_name, doctor_specialization,time_for_consult):
         if (path.exists('schema.db')):
             print('Schema is present!')
             pacient = self.get_from_db('Select * from person where cnp='+pacient_cnp+';')
             doctor = self.get_from_db('Select * from person where LastName="'+doctor_last_name+'" and FirstName="' + doctor_first_name+'";')
             spec = self.get_from_db('Select * from Specialization where cnp="'+doctor[0][3]+'" and Specialization="' + doctor_specialization+'";')
-            print(spec)
-            print(doctor)
-            sql = 'Insert into Schedule(Cnp,FirstName,LastName,FirstNameDoctor,LastNameDoctor,Specialization,ScheduleTime) VALUES ("'+pacient[0][3]+'","'+pacient[0][0]+'","'+pacient[0][1]+'","'+doctor[0][0]+'","'+doctor[0][1]+'","'+spec[0][1]+'","'+self.__get_curent_time()+'");'
+            sql = 'Insert into Schedule(Cnp,FirstName,LastName,FirstNameDoctor,LastNameDoctor,Specialization,ScheduleTime) VALUES ("'+pacient[0][3]+'","'+pacient[0][0]+'","'+pacient[0][1]+'","'+doctor[0][0]+'","'+doctor[0][1]+'","'+spec[0][1]+'","'+time_for_consult+'");'
             self.connection.connect()
             self.connection.execute(sql)
             return True

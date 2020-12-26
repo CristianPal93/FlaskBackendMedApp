@@ -88,13 +88,14 @@ def register_client():
 
 @app.route('/write-schedule',methods=['POST'])
 def register_client():
-    if "pacient_cnp" and "doctor_firstname" and "doctor_lastname" and "doctor_spec" in request.headers:
+    if "pacient_cnp" and "doctor_firstname" and "doctor_lastname" and "doctor_spec" and "time_for_consult" in request.headers:
         pacient_cnp=request.headers['pacient_cnp']
         doc_firstname=request.headers['doctor_firstname']
         doc_lastname=request.headers['doctor_lastname']
         doc_spec=request.headers['doctor_spec']
+        time=request.headers['time_for_consult']
         dataBase=DataBase()
-        success=dataBase.write_schedule(pacient_cnp,doc_firstname,doc_lastname,doc_spec)
+        success=dataBase.write_schedule(pacient_cnp,doc_firstname,doc_lastname,doc_spec,time)
         if success:
             return jsonify({"message":"account created succesfully!"})
         return jsonify({'message':'something went wrong.. :('})
