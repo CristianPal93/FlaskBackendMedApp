@@ -86,7 +86,7 @@ def register_client():
     # def write_schedule(self, pacient_cnp, doctor_first_name, doctor_last_name, doctor_specialization):
 
 
-@app.route('/write_schedule',methods=['POST'])
+@app.route('/write-schedule',methods=['POST'])
 def register_client():
     if "pacient_cnp" and "doctor_firstname" and "doctor_lastname" and "doctor_spec" in request.headers:
         pacient_cnp=request.headers['pacient_cnp']
