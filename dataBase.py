@@ -563,10 +563,9 @@ def load():
         d = DataBase()
 
         d.insertSecretara("Anca", "Hoinar", "anca.hoinar@gmail.com", "Admin123", "1900925303932")
-        d.insertAdmin("Gigi", "Becali", "gigi.becali@gmail.com", "Admin123", "1890925303932")
+        d.insertAdmin("Boros", "Larisa", "boros.larisa@gmail.com", "Admin123", "1890925303932")
         d.insertPacient("Cristian", "Pal", "cristian.pal@gmail.com", "Admin123", "1930925303932")
         d.insertDoctor("Laurentiu", "Girleanu", "laurentiu.girleanu@gmail.com", "Admin123", "1910925303932")
-
         d.insertDoctor("Ion", "Popescu", "ion.popescu@gmail.com", "Admin123", "1910924403932")
         d.addSpecialization("1910924403932", "Psiholog", "+40742451132")
         d.addSpecialization("1910925303932", "Neurolog", "+40742451132")
