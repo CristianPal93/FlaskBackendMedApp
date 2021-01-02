@@ -491,9 +491,6 @@ def login():
         if not dataBase.checkUser(username, password):
             return make_response({'message': 'Invalid username or password'}, 401)
         user_rights=dataBase.checkJob(username, password)
-        first_name,last_name=dataBase.getUserName(username)
-        # full_Name=first_name+" "+last_name
-
         token = jwt.encode({'USER_KEY': username, 'exp': tokenValability},
                            app.config['SECRET_KEY'])
         return jsonify({'accessToken': token.decode('UTF-8'), 'USER_KEY': username, 'USER_ROLE':user_rights})
