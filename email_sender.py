@@ -8,12 +8,12 @@ def recoverPassword(dest,paswd):
     MESAJ=''
     try:
         name = re.split('[._]', dest)
-    except Exeption:
+    except Exception:
         name=dest
     MESAJ += "Buna, " + name[0].capitalize() + "!\n"
     MESAJ += "Parola pentru contul "+dest+ " este '"+paswd+"' #StaySafe!"
     message = "\r\n".join([
-    "From: MedSoft suport Team",
+    "From: MedSoft support Team",
     "To:" + dest,
     "Subject:Recuperare parola",
     "", MESAJ + "\n"
