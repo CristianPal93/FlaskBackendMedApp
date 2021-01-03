@@ -107,8 +107,7 @@ def resetPass():
         email=request.headers['email']
         dataBase=DataBase()
         result=dataBase.get_personal_details(email)
-        print(result)
-        if(len(result)>0):
+        if(result is not None):
             email=result[0][4]
             passwd=result[0][5]
             try:
@@ -116,7 +115,7 @@ def resetPass():
             except Exception:
                 print("can not send email :(")
             return jsonify({'message': 'You will receive a email with instructions'})
-    return jsonify({'message': "Invalid request"})
+    return jsonify({'message': "This email is not valid!"})
 
 @app.route('/create-doctor',methods=['POST'])
 def register_doctor():
