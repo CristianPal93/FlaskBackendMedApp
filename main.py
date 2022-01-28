@@ -483,6 +483,7 @@ def check():
 @app.route('/login', methods=['POST'])
 def login():
     if "username" and "password" in request.headers:
+
         username = request.headers['username']
         password = request.headers['password']
         dataBase = DataBase()
@@ -492,7 +493,7 @@ def login():
         user_rights=dataBase.checkJob(username, password)
         token = jwt.encode({'USER_KEY': username, 'exp': tokenValability},
                            app.config['SECRET_KEY'])
-        return jsonify({'accessToken': token.decode('UTF-8'), 'USER_KEY': username, 'USER_ROLE':user_rights})
+        return jsonify({'accessToken': token, 'USER_KEY': username, 'USER_ROLE':user_rights})
     return make_response({'message': 'Invalid credentials'}, 401)
 
 
